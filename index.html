@@ -1,0 +1,259 @@
+<!--
+  Static single-file portfolio for GitHub user: Zhnnyyy
+  - Responsive, accessible, and mobile-first
+  - Improved UI/UX: clear hierarchy, focus states, keyboard-friendly
+  - Includes rewritten About, Skills, Projects, Contact sections
+  - Dark mode toggle and simple animations (no external libraries)
+
+  How to use:
+  1. Save this file as index.html
+  2. Open locally in your browser to preview
+  3. To deploy: push to a repo named <your-username>.github.io or any repo and enable GitHub Pages
+
+  Notes: replace any placeholder text or project descriptions with your preferred wording.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zhnnyyy — Software & Mobile Developer</title>
+  <meta name="description" content="Portfolio of Zhnnyyy — web, Android & cross-platform apps. Browse projects, skills, and contact info." />
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#6ee7b7;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --maxw:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,#071024 0%, var(--bg) 60%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{width:100%;max-width:var(--maxw);}
+
+    header{
+      display:flex;gap:20px;align-items:center;margin-bottom:24px;
+    }
+    .brand{
+      display:flex;gap:16px;align-items:center;
+    }
+    .avatar{width:96px;height:96px;border-radius:20px;overflow:hidden;border:2px solid rgba(255,255,255,0.06);flex-shrink:0}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    h1{font-size:1.6rem;margin:0}
+    .tagline{color:var(--muted);margin-top:4px;font-size:0.95rem}
+
+    nav{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:inherit;text-decoration:none;font-weight:600;cursor:pointer}
+    .btn:focus{outline:3px solid rgba(110,231,183,0.18)}
+
+    main{display:grid;grid-template-columns:320px 1fr;gap:28px;align-items:start}
+
+    /* SIDEBAR */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));padding:18px;border-radius:var(--radius);backdrop-filter: blur(6px);box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .sidebar{position:sticky;top:24px}
+    .section-title{font-size:0.9rem;color:var(--muted);margin:10px 0}
+    .meta{font-size:0.95rem;color:var(--muted);line-height:1.5}
+    .skill-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .badge{background:var(--glass);padding:6px 10px;border-radius:999px;font-weight:600;color:var(--muted);font-size:0.88rem}
+
+    /* CONTENT */
+    .content h2{margin:0 0 12px 0}
+    .about p{color:var(--muted);line-height:1.6}
+
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .proj{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);transition:transform .18s ease,box-shadow .18s ease}
+    .proj:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(3,8,23,0.6)}
+    .proj h3{margin:0;font-size:1.02rem}
+    .proj p{margin:0;color:var(--muted);font-size:0.92rem}
+    .proj-links{margin-top:auto;display:flex;gap:8px}
+    .chip{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.02);font-weight:600;border:1px solid rgba(255,255,255,0.03);font-size:0.85rem}
+
+    .contact-list{display:flex;flex-direction:column;gap:8px}
+    a.link{color:var(--accent)}
+
+    footer{margin-top:28px;color:var(--muted);font-size:0.85rem;text-align:center}
+
+    /* RESPONSIVE */
+    @media (max-width:880px){
+      main{grid-template-columns:1fr;}
+      .avatar{width:84px;height:84px}
+      header{flex-direction:column;align-items:flex-start}
+      nav{width:100%;justify-content:space-between}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .space{height:12px}
+
+    /* subtle entrance */
+    .fade-in{opacity:0;transform:translateY(6px);animation:fadeIn .7s forwards}
+    @keyframes fadeIn{to{opacity:1;transform:none}}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="fade-in">
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">
+          <!-- GitHub avatar (auto-redirect) -->
+          <img src="https://github.com/Zhnnyyy.png" alt="Zhnnyyy avatar"/>
+        </div>
+        <div>
+          <h1>Zhnnyyy</h1>
+          <div class="tagline">Software & Mobile Developer — Android · Web · Tools</div>
+        </div>
+      </div>
+
+      <nav>
+        <button class="btn" id="download-cv">Download CV</button>
+        <a class="btn" href="#projects">Projects</a>
+        <a class="btn" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <aside class="sidebar">
+        <div class="card fade-in" style="animation-delay:.08s">
+          <div class="section-title">About</div>
+          <div class="meta about">
+            <p>I'm a practical developer who builds reliable apps — mobile-first Android work and full-stack web tools. I aim for clean, maintainable code and fast user experiences. Based in the Philippines.</p>
+          </div>
+
+          <div class="space"></div>
+          <div class="section-title">Skills</div>
+          <div class="skill-badges">
+            <div class="badge">Android</div>
+            <div class="badge">Kotlin</div>
+            <div class="badge">Java</div>
+            <div class="badge">React</div>
+            <div class="badge">Node.js</div>
+            <div class="badge">REST APIs</div>
+            <div class="badge">Git</div>
+          </div>
+
+          <div class="space"></div>
+          <div class="section-title">Quick Links</div>
+          <div class="contact-list">
+            <a class="link" href="https://github.com/Zhnnyyy" target="_blank" rel="noopener">GitHub — github.com/Zhnnyyy</a>
+            <a class="link" href="https://client-smoky-three.vercel.app/" target="_blank" rel="noopener">Current live portfolio</a>
+            <a class="link" href="mailto:ed.perpetua1225@gmail.com">ed.perpetua1225@gmail.com</a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="card fade-in" style="animation-delay:.12s">
+          <h2>Featured Projects</h2>
+          <p class="muted">A selection of repositories showcasing mobile and web work. Click any card to open the GitHub repo.</p>
+
+          <div id="projects" class="projects-grid" style="margin-top:14px">
+            <!-- Project cards injected by JS for easy editing -->
+          </div>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="card fade-in" style="animation-delay:.14s">
+          <h2>Contact</h2>
+          <p class="muted">I'm open to collaborations, freelance gigs, or just to chat about code. Typical response time: 24–48 hours.</p>
+
+          <div id="contact" style="margin-top:12px">
+            <div class="contact-list">
+              <div class="chip">Email: <a class="link" href="mailto:ed.perpetua1225@gmail.com">ed.perpetua1225@gmail.com</a></div>
+              <div class="chip">GitHub: <a class="link" href="https://github.com/Zhnnyyy" target="_blank">github.com/Zhnnyyy</a></div>
+              <div class="chip">Live: <a class="link" href="https://client-smoky-three.vercel.app/" target="_blank">client-smoky-three.vercel.app</a></div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="fade-in" style="animation-delay:.16s">© <span id="year"></span> Zhnnyyy — Built with clarity & speed</footer>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Basic client-side enhancements: projects list, CV download, accessibility helpers
+    const projects = [
+      {
+        name: 'HumanResourceSystem',
+        desc: 'HR management web app — attendance, employee records, reports. Backend + frontend components in one repo.',
+        url: 'https://github.com/Zhnnyyy/HumanResourceSystem',
+        tags: ['Web', 'Node.js']
+      },
+      {
+        name: 'AndroidFacebookSignIn',
+        desc: 'Android example project demonstrating Facebook OAuth sign-in integration.',
+        url: 'https://github.com/Zhnnyyy/AndroidFacebookSignIn',
+        tags: ['Android','Auth']
+      },
+      {
+        name: 'AndroidCurrentLocation',
+        desc: 'Small Android app that fetches and displays the device\'s current GPS location with map preview.',
+        url: 'https://github.com/Zhnnyyy/AndroidCurrentLocation',
+        tags: ['Android','Location']
+      },
+      {
+        name: 'AndroidGoogleSignIn',
+        desc: 'Google Sign-In integration example for Android projects.',
+        url: 'https://github.com/Zhnnyyy/AndroidGoogleSignIn',
+        tags: ['Android','Auth']
+      }
+    ];
+
+    const grid = document.getElementById('projects');
+    projects.forEach(p => {
+      const el = document.createElement('a');
+      el.className = 'proj';
+      el.href = p.url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      el.innerHTML = `
+        <div>
+          <h3>${escapeHtml(p.name)}</h3>
+          <p>${escapeHtml(p.desc)}</p>
+        </div>
+        <div class="proj-links">
+          <div class="chip">${escapeHtml(p.tags.join(' • '))}</div>
+          <div style="margin-left:auto" class="chip">View on GitHub</div>
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+
+    // Simple CV button: downloads a tiny autogenerated text CV
+    document.getElementById('download-cv').addEventListener('click', function(){
+      const cv = `Zhnnyyy\n\nRole: Software & Mobile Developer\nLocation: Philippines\n\nSkills:\n- Android (Kotlin, Java)\n- Web (React, Node.js)\n- REST APIs, Git\n\nSelected Projects:\n- HumanResourceSystem\n- AndroidFacebookSignIn\n- AndroidCurrentLocation\n- AndroidGoogleSignIn\n\nContact: ed.perpetua1225@gmail.com`;
+      const blob = new Blob([cv],{type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Zhnnyyy-CV.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // small helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function escapeHtml(str){
+      return str.replace(/[&<>\"']/g, function(tag){
+        const chars = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+        return chars[tag] || tag;
+      });
+    }
+  </script>
+</body>
+</html>
